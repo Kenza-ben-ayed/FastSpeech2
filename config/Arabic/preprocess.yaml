@@ -1,11 +1,11 @@
 dataset: "Arabic"
 
 path:
-  corpus_path: "/content/arabic-speech-corpus"
-  lexicon_path: "lexicon/librispeech-lexicon.txt"
-  raw_path: "/content/raw_data/Arabic"
-  preprocessed_path: "/content/preprocessed_data/Arabic"
-  stats_path: "./"
+  corpus_path: "C:/Users/btaza/Desktop/hafadhny project/Voice backend Server Python/arabic-speech-corpus" # Corrected path for corpus
+  lexicon_path: "C:/Users/btaza/Desktop/hafadhny project/Voice backend Server Python/lexicon/librispeech-lexicon.txt" # Ensure this path is correct
+  raw_path: "C:/Users/btaza/Desktop/hafadhny project/Voice backend Server Python/raw_data/Arabic" # Corrected path for raw data
+  preprocessed_path: "C:/Users/btaza/Desktop/hafadhny project/Voice backend Server Python/preprocessed_data/Arabic" # Corrected path for preprocessed data
+  stats_path: "./" # Keeping as is, or you can provide a full path if needed
 
 preprocessing:
   val_size: 2

@@ -12,11 +12,9 @@ from utils.model import get_model, get_vocoder, get_param_num
 from utils.tools import to_device, log, synth_one_sample
 from model import FastSpeech2Loss
 from dataset import Dataset
-
 from evaluate import evaluate
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 def main(args, configs):
     print("Prepare training ...")
@@ -24,10 +22,11 @@ def main(args, configs):
     preprocess_config, model_config, train_config = configs
 
     # Get dataset
-    dataset = Dataset(
-        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
-    )
+    dataset = Dataset("C:/Users/btaza/Desktop/hafadhny project/Voice backend Server Python/FastSpeech2/preprocessed_data/LibriTTS/train.txt", preprocess_config, train_config, sort=True, drop_last=True)
+
     batch_size = train_config["optimizer"]["batch_size"]
+    print(f"Dataset length: {len(dataset)}")
+
     group_size = 4  # Set this larger than 1 to enable sorting in Dataset
     assert batch_size * group_size < len(dataset)
     loader = DataLoader(
@@ -36,6 +35,7 @@ def main(args, configs):
         shuffle=True,
         collate_fn=dataset.collate_fn,
     )
+    print("Dataset loaded successfully.")
 
     # Prepare model
     model, optimizer = get_model(args, configs, device, train=True)
@@ -81,7 +81,7 @@ def main(args, configs):
                 # Forward
                 output = model(*(batch[2:]))
 
-                # Cal Loss
+                # Calculate Loss
                 losses = Loss(batch, output)
                 total_loss = losses[0]
 
@@ -167,7 +167,6 @@ def main(args, configs):
 
             # inner_bar.update(1)
         epoch += 1
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
